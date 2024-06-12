@@ -7,7 +7,9 @@ import {
 } from "@remix-run/react";
 import "./tailwind.css";
 
-export function Layout({ children }: { children: React.ReactNode }) {
+type LayoutProps = { children: React.ReactNode };
+
+export function Layout({ children }: Readonly<LayoutProps>) {
   return (
     <html lang="en">
       <head>
