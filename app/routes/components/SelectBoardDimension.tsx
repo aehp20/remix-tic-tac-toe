@@ -10,7 +10,7 @@ export const SelectBoardDimension = (
   return (
     <select onChange={handleChange}>
       <option value={0}>Choose a dimension...</option>
-      {Array.from({ length: 9 }).map((_, index) => {
+      {Array.from({ length: 9 }, (_, index) => {
         const size = index + 2;
         return (
           <option key={size} value={size}>

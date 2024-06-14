@@ -140,8 +140,10 @@ export default function Index() {
   };
 
   const resetBoard = () => {
-    const items = Array.from({ length: size });
-    setBoard(items.map(() => [...items].map(() => -1)));
+    const items = Array.from({ length: size }, () =>
+      Array.from({ length: size }, () => -1)
+    );
+    setBoard(items);
   };
 
   const resetCurrentPlayer = () => {
