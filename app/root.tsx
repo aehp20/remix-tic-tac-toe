@@ -18,7 +18,7 @@ export function Layout({ children }: Readonly<LayoutProps>) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body suppressHydrationWarning={true}>
         {children}
         <ScrollRestoration />
         <Scripts />
