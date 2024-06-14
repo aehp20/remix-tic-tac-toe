@@ -31,11 +31,28 @@ export default function Index() {
   };
 
   const handleClick = (row: number, col: number, player: number) => {
+    saveMovement(row, col, player);
+    changePlayer(player);
+    countMovements();
+    findWinner(row, col);
+  };
+
+  const saveMovement = (row: number, col: number, player: number) => {
     invariant(board, "Board is not initialized");
-    board[row][col] = player;
-    setBoard(board);
+    const currentBoard = [...board];
+    currentBoard[row][col] = player;
+    setBoard(currentBoard);
+  };
+
+  const changePlayer = (player: number) => {
     setPlayer(player === 0 ? 1 : 0);
+  };
+
+  const countMovements = () => {
     setNbMovement((prev) => prev + 1);
+  };
+
+  const findWinner = (row: number, col: number) => {
     if (checkWinner(row, col)) {
       setIsThereAWinner(true);
     }
@@ -93,16 +110,32 @@ export default function Index() {
     return allLeftDiagonalIsChecked || allRightDiagonalIsChecked;
   };
 
-  const resetGame = (size: number) => {
+  const resetGame = () => {
+    resetBoard();
+    resetCurrentPlayer();
+    resetNbMovements();
+    resetIsThereAWinner();
+  };
+
+  const resetBoard = () => {
     const items = Array.from({ length: size });
     setBoard(items.map(() => Array.from({ length: size }).map(() => -1)));
+  };
+
+  const resetCurrentPlayer = () => {
     setPlayer(0);
+  };
+
+  const resetNbMovements = () => {
     setNbMovement(0);
+  };
+
+  const resetIsThereAWinner = () => {
     setIsThereAWinner(false);
   };
 
   useEffect(() => {
-    resetGame(size);
+    resetGame();
   }, [size]);
 
   return (
